@@ -1,0 +1,94 @@
+<app-header></app-header>
+
+<div class="container-fluid max-content">
+    <div class="row mt-2 mb-1">
+        <div class="col">
+            <div class="card" style="width: 83rem;">                
+                <div class="card-body">
+                    <h5 class="card-title mt-2 mb-2">Listado del Personal</h5>
+                  
+                    <div class="row mt-3"> 
+                        <div class="col-lg-5 col-md-5 col-sm-12 ">
+                            <div class="input-group">
+                                <input
+                                    [(ngModel)]="criterioBusqueda"
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Ingrese criterio de búsqueda">
+                                <span
+                                    class="btn btn-info"
+                                    (click)="buscarCriterio()"
+                                    style="cursor: pointer;">
+                                    <i class="fa fa-search"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-12">
+                        </div>
+                        <div class="col-lg-5 col-md-5 col-sm-12 d-flex justify-content-end">
+                            <button type="button" (click)="clear()" class="btn btn-info">Limpiar</button>
+                            <button type="button" (click)="showModal()" class="btn btn-primary ml-2">Agregar</button>
+                            
+                        </div>                        
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped table-bordered table-agexport">
+                                  <thead class="thead-agexport">
+                                    <tr>
+                                        <th>Dpi</th>
+                                        <th>Nombre Completo</th>
+                                        <th>Género</th>
+                                        <th>Movil</th>
+                                        <th>Puesto</th>  
+                                        <th>Opciones</th>  
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr *ngFor="let item of lstEmpleados | paginate: { itemsPerPage: 2, currentPage: Pages }">           
+                                        <td>{{item.Dpi}}</td>
+                                        <td>{{item.Nombre_completo}}</td>
+                                        <td>{{item.Genero}}</td>
+                                        <td>{{item.Movil}}</td>
+                                        <td>{{item.Nombre_puesto}}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-info" (click)="showModal(item)">
+                                                <i class="fa-solid fa-pen-to-square"></i>   
+                                            </button>
+                                            <button type="button" class="btn btn-danger ml-2" (click)="EliminarRegistro(item)">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                  </tbody>   
+                                  <tfoot *ngIf="!lstEmpleados.length" >
+                                    <tr>
+                                        <td colspan="6" align="center">
+                                            <div>
+                                                No se encontraron registros.
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tfoot>           
+                                </table> 
+                                <div style="text-align: center;">
+                                  <pagination-controls
+                                    *ngIf="lstEmpleados.length>2"
+                                    (pageChange)="Pages = $event"
+                                    previousLabel="Anterior"
+                                    nextLabel="Siguiente">
+                                  </pagination-controls>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<app-footer></app-footer>

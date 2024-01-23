@@ -1,0 +1,346 @@
+<div class="modal-content">
+    <form [formGroup]="FormEmpleado">
+
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">{{tituloSeccion}}</h4>
+        <button type="button" class="close btn-close pull-right" aria-label="Close" (click)="CerrarModal()">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label class="required">Dpi</label>
+                        <input
+                            type="number"
+                            (keypress)="soloNumerosEnteros($event, $event)"
+                            class="form-control"
+                            onKeyPress="if(this.value.length==13) return false;"                            
+                            formControlName="Dpi"
+                            >
+                        <div *ngIf="Dpi?.touched && Dpi?.errors">
+                            <small
+                              *ngIf="Dpi?.hasError('required')"
+                              style="color: red;">
+                              El campo es requerido
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label class="required">Primer Nombre</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="Primer_nombre"
+                            >
+                            <div *ngIf="Primer_nombre?.touched && Primer_nombre?.errors">
+                                <small
+                                  *ngIf="Primer_nombre?.hasError('required')"
+                                  style="color: red;">
+                                  El campo es requerido
+                                </small>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label>Segundo Nombre</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="Segundo_nombre"
+                            >
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label> Tercer Nombre</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="Tercer_nombre"
+                            >
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label class="required">Primer Apellido</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="Primer_apellido"
+                            >
+                            <div *ngIf="Primer_apellido?.touched && Primer_apellido?.errors">
+                                <small
+                                  *ngIf="Primer_apellido?.hasError('required')"
+                                  style="color: red;">
+                                  El campo es requerido
+                                </small>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label>Segundo Apellido</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="Segundo_apellido"
+                            >
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label
+                            class="required">Puesto
+                        </label>
+                        <select
+                            class="form-control"
+                            formControlName="Id_puesto">
+                            <option [ngValue]="null">Seleccione un Puesto</option>
+                            <option *ngFor="let item of catPuesto" [value]="item.Id_puesto" >{{item.Nombre_puesto}}</option>
+                        </select>
+                        <div *ngIf="Id_puesto?.touched && Id_puesto?.errors">
+                            <small
+                              *ngIf="Id_puesto?.hasError('required')"
+                              style="color: red;">
+                              El campo es requerido
+                            </small>
+                        </div>
+                    </div>
+                </div> 
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Salario</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            (keypress)="soloNumerosEnteros($event, $event)"
+                            (blur)="formatoDecimales($event, 'Salario')"
+                            formControlName="Salario"
+                            >
+                    </div>
+                </div>               
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label
+                            class="required">Genero
+                        </label>
+                        <select
+                            class="form-control"
+                            formControlName="Genero">
+                            <option [ngValue]="null">Seleccione un Genero</option>
+                            <option [ngValue]="'Masculino'">Masculino</option>
+                            <option [ngValue]="'Femenino'">Femenino</option>
+                        </select>
+                        <div *ngIf="Genero?.touched && Genero?.errors">
+                            <small
+                              *ngIf="Genero?.hasError('required')"
+                              style="color: red;">
+                              El campo es requerido
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="required">Direccion</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="Direccion"
+                            >
+                            <div *ngIf="Direccion?.touched && Direccion?.errors">
+                                <small
+                                  *ngIf="Direccion?.hasError('required')"
+                                  style="color: red;">
+                                  El campo es requerido
+                                </small>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="form-group">
+                        <label>Zona</label>
+                        <input
+                            type="number"
+                            onKeyPress="if(this.value.length==2) return false;"                            
+                            (keypress)="soloNumerosEnteros($event, $event)"
+                            class="form-control"
+                            formControlName="Zona"
+                            >
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label>Fecha de Nacimiento</label>
+                    <input
+                        class="form-control"
+                        formControlName="Fecha_nacimiento"
+                        #dp="bsDatepicker"
+                        placeholder="dd/mm/yyyy"
+                        [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-dark-blue'}"
+                        bsDatepicker>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label>Telefono</label>
+                        <input
+                            type="number"
+                            (keypress)="soloNumerosEnteros($event, $event)"
+                            onKeyPress="if(this.value.length==8) return false;"
+                            class="form-control"
+                            formControlName="Telefono"
+                            >
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label class="required">Movil</label>
+                        <input
+                            type="text"
+                            onKeyPress="if(this.value.length==8) return false;"
+                            (keypress)="soloNumerosEnteros($event, $event)"
+                            class="form-control"
+                            formControlName="Movil"
+                            >
+                            <div *ngIf="Movil?.touched && Movil?.errors">
+                                <small
+                                  *ngIf="Movil?.hasError('required')"
+                                  style="color: red;">
+                                  El campo es requerido
+                                </small>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <div class="form-group">
+                        <label>Nit</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="Nit"
+                            >
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <label>Pasaporte</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="Pasaporte"
+                            >
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <label>Número Igss</label>
+                        <input
+                            type="number"
+                            (keypress)="soloNumerosEnteros($event, $event)"
+                            class="form-control"
+                            formControlName="No_igss"
+                            >
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <label>Número Irtra</label>
+                        <input
+                            type="number"
+                            (keypress)="soloNumerosEnteros($event, $event)"
+                            class="form-control"
+                            formControlName="No_irtra"
+                            >
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label>Correo Personal</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="Correo_personal"
+                            >
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label>Correo Institucional</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="Correo_institucional"
+                            >
+                    </div>
+                </div>
+                <div class="col-4">
+                    <label>Fecha de ingreso</label>
+                    <input
+                        class="form-control"
+                        formControlName="Fecha_ingreso"
+                        #dp2="bsDatepicker"
+                        placeholder="dd/mm/yyyy"
+                        [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY', containerClass: 'theme-dark-blue'}"
+                        bsDatepicker>                    
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label>Nombre del contacto de Emergencia</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="Emergencia_nombre"
+                            >
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label>Número de Telefono:</label>
+                        <input
+                            type="number"
+                            onKeyPress="if(this.value.length==8) return false;"
+                            (keypress)="soloNumerosEnteros($event, $event)"
+                            class="form-control"
+                            formControlName="Emergencia_contacto"
+                            >
+                    </div>
+                </div>
+            </div>
+
+        
+    </div>
+    <div class="modal-footer">
+        <div class="d-flex flex-row-reverse">
+            <div class="p-2"></div>
+            <div class="p-2">
+                <button type="button" class=" btn btn-primary" (click)="SaveForm()">Guardar</button>
+            </div>
+            <div class="p-2">      
+                <button type="button" class=" btn btn-danger" (click)="CerrarModal()">Cerrar</button>
+            </div>
+        </div>        
+     </div>
+     
+    </form>  
+</div>

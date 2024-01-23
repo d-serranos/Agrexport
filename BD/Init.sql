@@ -1,0 +1,10 @@
+alter session set "_ORACLE_SCRIPT"=true;
+
+CREATE USER agexport IDENTIFIED BY "4g3xp0rt";
+
+GRANT CONNECT TO agexport;
+
+GRANT CREATE SESSION TO agexport;
+
+GRANT ALL PRIVILEGES TO AGEXPORT;
+
